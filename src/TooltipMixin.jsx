@@ -16,7 +16,7 @@ let TooltipMixin = {
 
 	getDefaultProps() {
 		return {
-			tooltipOffset: {top: -20, left: 15},
+			tooltipOffset: {top: 30, left: 30},
 			tooltipHtml: null
 		};
 	},
@@ -33,6 +33,7 @@ let TooltipMixin = {
 		e.preventDefault();
 
 		let {margin, tooltipHtml} = this.props;
+		let parentNode = this.getDOMNode();
 
 		let svg = this._svg_node;
 		let position;
@@ -49,8 +50,8 @@ let TooltipMixin = {
 
 		this.setState({
 			tooltip: {
-				top: e.clientY + this.props.tooltipOffset.top,
-				left: e.clientX + this.props.tooltipOffset.left,
+				top: e.clientY + this.props.tooltipOffset.top - parentNode.top,
+				left: e.clientX + this.props.tooltipOffset.left - parentNode.left,
 				hidden: false,
 				html: this._tooltipHtml(data, position)
 			}
